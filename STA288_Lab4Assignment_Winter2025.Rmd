@@ -1,0 +1,119 @@
+---
+title: "STA288 Lab 4 Assignment - Inference on Means (WINTER 2025)"
+author: "TYPE YOUR *NAME* HERE (type your *STUDENT NUMBER* & *LEC section* here)"
+output: pdf_document
+date: "2025-03-24"
+---
+
+## Lab 4 Assignment (both .Rmd & .pdf) - Due 11:59pm, Thurs March 27, on Quercus
+## Direct link to assignment - https://q.utoronto.ca/courses/380331/assignments/1436696  
+## Graded out of **18 marks**
+## *We recommend you review the R code used in recent lectures and LearnR Module 1-4 **before** attempting this lab assignment so you will be familiar with some R code that will be useful for this assignment.*
+## Note that late assignments and assignments submitted other ways (e.g., over email) will not be accepted. If you have trouble knitting your assignment, submit your completed Rmd on its own by the deadline so you can earn partial credit toward this assignment.
+
+This is an R Markdown document. Markdown is a syntax for authoring documents that are a mix of text and R code and output. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button above, a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. When you submit lab assignments in STA288, you will need to submit this R Markdown (.Rmd) file AND the pdf file you generate by clicking on **Knit > Knit to PDF** above (save that file as Lab1yourname.pdf). To save on your own machine to upload to Quercus, check the boxes next to the two files in the files tab on the right, then click **More > Export** and download to your own machine.
+
+*HELPFUL RMarkdown HINT* - This *may* come in handy for this assignment and your project. You may wish to include special characters like greek letters (like alpha or mu) or mathematical formulas in your writing in an R Markdown document from time to time. If you copy and paste these symbols from another program (e.g., Word), they will appear in your rmd file, but your document will *not* knit (you will receive an error and knitting will stop) so you will not be able to generate a pdf file from your rmd file. Instead, if you would like to include special characters you should use LaTeX (a typsetting language) code that, when knitted, will show the special characters in your pdf file. For instance, alpha can be typed as $\alpha$ (note: the code for this will show in the rmd file that generated this pdf document), mu can be typed as $\mu$ and xbar can be typed as $\bar{x}$. Mathematical relation symbols can be written as $=$, $<$, $>$, $\le$, $\ge$, $\neq$. A longer list of LaTeX code for typing mathematical symbols is available at [https://www.caam.rice.edu/~heinken/latex/symbols.pdf](https://www.caam.rice.edu/~heinken/latex/symbols.pdf). Here is another useful overview of RMarkdown formatting with some examples of typing equations and special characters - [http://www.math.mcgill.ca/yyang/regression/RMarkdown/example.html](http://www.math.mcgill.ca/yyang/regression/RMarkdown/example.html).
+
+\newpage
+
+In this lab, you will analyze and interpret some data on the individuals who participated in the study described in the following paper:
+
+Mudd, PA, Crawford, JC, Turner, JS, et al. (2020) "Distinct inflammatory profiles distinguish COVID-19 from influenza with limited contributions from cytokine storm" *Science Advances* 6(50), eabe3024.
+
+The following code reads in the raw data and stores it in an R dataset called *Lab4data*. Be sure to run this before running the later R code so that the dataset is read in and ready for you to work with. If you do not do this, you will get error messages when you try to run chunks of R code in your rmd document.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# Do not remove or edit this box. Make sure you run it (top right of this box) before trying to
+# write and run code later in the assignment.
+
+library(readr)
+library(tidyverse)
+
+# Code to read in data set:
+Lab4data<- read_csv("STA288Lab4Data_Mudd_etal2020.csv")
+```
+
+The following code reports the variables and the first values of these variables:
+```{r}
+glimpse(Lab4data)
+```
+
+## QUESTION 1 [9 marks total]
+
+A goal of the study conducted by Mudd et al. (2020) was to compare immunological responses to COVID and flu and those of healthy individuals. An important response to consider is inflammation, which can be detected by measuring levels of serum inflammatory cytokines (e.g., $\mbox{IFN-}\gamma$,IL-6, $\mbox{TNF-}\alpha$, G-CSF, IL-17a). Note that these cytokines levels were measured by Mudd et al. (2020) in *picograms per millilitre (pg/mL)*. However, they used a $log_{10}$ transformation on the data before summarizing and analyzing the data. So, the `log10()` R function may come in handy, or note that there is an argument in the `ggplot` function `scale_y_continuous()` to plot transformed data. 
+
+For this question, let's focus on *IL-17a*.
+
+**a.** *(1 mark)* Before looking at the data, or any summaries or figures that compare *IL-17a* levels between COVID, flu and healthy patients, what would you expect to see? Briefly justify your answer in the context of the study.
+
+*1a ANSWER*:
+
+
+
+**b.** *(3 marks)* Reproduce the plot comparing *IL-17a* levels for healthy controls, and influenza and SARS-CoV-2 patients in Figure 2C (p 5, Mudd et al. (2020)). Do not include the CSS group, nor the lines and p-values added to the plot. Do not worry about matching the colours.
+
+Repeat this without performing a $log_{10}$ transformation (i.e., use the original data.)
+
+Using the two summaries you produced, justify why the authors used a $log_{10}$ transformation on these measurements? 
+
+*1b ANSWER*:
+
+
+
+**c.** *(2 marks)* What do the black dots and red arrows to the right of the *IL-17a* level plot in Figure 2C (p 5, Mudd et al. (2020)) represent? Although it seems the authors used a more advanced statistical procedure to obtain these values, compute these values using the methods discussed in STA288 and compare your results to those displayed in the figure. 
+
+*1c ANSWER*:
+
+
+
+**d.** *(3 mark)* Based on the Figure 2C caption, the authors are interpreting overlap in standard error bars as no statistical difference between in mean cykocine levels (reported on a $log_{10}$ scale) between flu and COVID patients. Recall that one of the misconceptions about confidence intervals discussed in Greenland et al. (2016) (a STA288 reading in Week 6) was incorrectly concluding overlapping confidence intervals as a non-statistically significant difference. 
+
+Of the procedures you've learned in STA288, what would be the most appropriate procedure to compare average *IL-17a* levels (on a $log_{10}$ scale) for influenza and COVID-19 patients based on these data? 
+Conduct the procedure you selected and interpret your result in the context of the study. Do your results match what was displayed in Figure 2C?
+
+*1d ANSWER*:
+
+
+
+\newpage
+
+## QUESTION 2 [9 marks total]
+
+
+**a.** *(3 marks)*
+Now let us consider if there are there differences in average **IL-17a levels measured on a $log_{10}$ scale** for COVID, flu and healthy patients.
+
+List the null and alternative hypothesis for a one-way ANOVA comparing **IL-17a levels measured on a $log_{10}$ scale** across the three conditions. Be sure to define any notation you use. 
+
+Then, use R to fit and display the summary of the one-way ANOVA based on the Mudd et al. (2020) primary study data.
+
+*2a ANSWER*: 
+
+
+
+**b.** *(4 marks)*
+List and assess the conditions for the one-way ANOVA conditions in the context of this study and data. Assume that *it is reasonable to assume that IL-17a levels are independent across patients within and between conditions* (so you do not need to check these specific conditions).
+
+*2b ANSWER*: 
+
+
+
+**c.** *(2 marks)*
+Obtain adjusted Tukey p-values using the appropriate R functions, for all pairwise comparisons of means and briefly interpret these results in the context of this study using an overall *5%* significance level. Does this match your conclusion based on the ANOVA F-test in *Question 2a*? Briefly explain why or why not. Assume the ANOVA assumptions are all reasonable to answer this question.
+
+*2c ANSWER*: 
+
+
+
+__________________________________________________________________________
+THIS IS THE END OF LAB ASSIGNMENT 4
+```{r echo = FALSE}
+# for grader use only (do not remove or edit this box)
+runif(1,0,1)
+date()
+```
