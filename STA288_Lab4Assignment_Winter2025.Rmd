@@ -17,6 +17,14 @@ When you click the **Knit** button above, a document will be generated that incl
 
 *HELPFUL RMarkdown HINT* - This *may* come in handy for this assignment and your project. You may wish to include special characters like greek letters (like alpha or mu) or mathematical formulas in your writing in an R Markdown document from time to time. If you copy and paste these symbols from another program (e.g., Word), they will appear in your rmd file, but your document will *not* knit (you will receive an error and knitting will stop) so you will not be able to generate a pdf file from your rmd file. Instead, if you would like to include special characters you should use LaTeX (a typsetting language) code that, when knitted, will show the special characters in your pdf file. For instance, alpha can be typed as $\alpha$ (note: the code for this will show in the rmd file that generated this pdf document), mu can be typed as $\mu$ and xbar can be typed as $\bar{x}$. Mathematical relation symbols can be written as $=$, $<$, $>$, $\le$, $\ge$, $\neq$. A longer list of LaTeX code for typing mathematical symbols is available at [https://www.caam.rice.edu/~heinken/latex/symbols.pdf](https://www.caam.rice.edu/~heinken/latex/symbols.pdf). Here is another useful overview of RMarkdown formatting with some examples of typing equations and special characters - [http://www.math.mcgill.ca/yyang/regression/RMarkdown/example.html](http://www.math.mcgill.ca/yyang/regression/RMarkdown/example.html).
 
+To add R chunks, you simply type the following (or copy and past the chunk below and add your code to it). Note that ` is the grave accent/left apostrophe/backtick (it typically shares a key with ~ on most keyboards), and do not confuse it with ', the regular apostrophe.
+You can modify r chunks to run/not run/display output/display errors/display warnings, etc, by changing what is inside the curly brackets OR by clicking on the gear icon at the top-right of each chunk and changing the settings. For example, changing {r} to {r warning=FALSE} will suppress all warning messages.  
+```{r}
+
+#Type your code here
+
+```
+
 \newpage
 
 In this lab, you will analyze and interpret some data on the individuals who participated in the study described in the following paper:
